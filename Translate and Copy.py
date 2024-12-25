@@ -1,6 +1,7 @@
 # Mapping English keyboard input to Hebrew keyboard equivalent
-import pyperclip
+import pyperclip  # Import pyperclip to interact with the clipboard
 
+# Dictionary mapping English characters to Hebrew keyboard equivalents
 ENGLISH_TO_HEBREW = {
     'a': 'ש', 'b': 'נ', 'c': 'ב', 'd': 'ג', 'e': 'ק',
     'f': 'כ', 'g': 'ע', 'h': 'י', 'i': 'ן', 'j': 'ח',
@@ -22,25 +23,34 @@ def translate_to_hebrew(english_text):
     :param english_text: Input text typed as if on an English keyboard.
     :return: Translated Hebrew text.
     """
-    hebrew_text = ""
-    for char in english_text:
-        hebrew_text += ENGLISH_TO_HEBREW.get(char, char)  # Default to the char if no mapping found
-    return hebrew_text
+    hebrew_text = ""  # Initialize an empty string to store the translated Hebrew text
+    for char in english_text:  # Loop through each character in the input string
+        # Lookup each character in the ENGLISH_TO_HEBREW dictionary.
+        # If no match is found, return the character itself.
+        hebrew_text += ENGLISH_TO_HEBREW.get(char, char)
+    return hebrew_text  # Return the fully translated Hebrew text
 
 def main():
+    """
+    Main function to handle user interaction and text translation.
+    """
     print("Welcome to the English-to-Hebrew Keyboard Translator!")
     print("Enter text typed in English keyboard layout, and it will be converted to Hebrew.")
     print("Type 'exit' to quit the application.\n")
 
-    while True:
-        english_text = input("Enter English text: ")
-        if english_text.lower() == 'exit':
+    while True:  # Infinite loop to keep the program running until user exits
+        english_text = input("Enter English text: ")  # Prompt the user for input
+        if english_text.lower() == 'exit':  # If the user types 'exit', end the loop
             print("Exiting the translator. Goodbye!")
-            break
-        hebrew_text = translate_to_hebrew(english_text)
-        pyperclip.copy(hebrew_text)
-        print(f"Translated Hebrew text: {hebrew_text}")
-        print("The translated text has been copied to your clipboard.\n")
+            break  # Exit the while loop
+
+        hebrew_text = translate_to_hebrew(english_text)  # Convert the input text to Hebrew
+        pyperclip.copy(hebrew_text)  # Copy the translated Hebrew text to the clipboard
+        print(f"Translated Hebrew text: {hebrew_text}")  # Display the translated text
+        print("The translated text has been copied to your clipboard.\n")  # Notify the user that the text is copied
 
 if __name__ == "__main__":
-    main()
+    """
+    Entry point for the program to start the main function.
+    """
+    main()  # Call the main function to begin the translation process
